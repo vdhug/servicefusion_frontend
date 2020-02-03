@@ -2,7 +2,13 @@
   <nav id="sidebar">
     <p class="sidebar-title">Persons</p>
     <ul class="sidebar-options">
-      <li><a href="#">Search</a></li>
+      <router-link to="/new">
+        New
+      </router-link>
+
+      <router-link to="#">
+        Search
+      </router-link>
     </ul>
 
     <p  class="sidebar-title">API</p>
@@ -28,7 +34,6 @@ export default {
   align-items: flex-end;
   padding: 70px 30px 0px;
   height: 100vh;
-  border: 3px solid green;
 }
 
 .sidebar-title {
@@ -44,19 +49,19 @@ export default {
   margin-top: 10px;
 }
 
-.sidebar-options li {
+.sidebar-options a {
+  display: block;
   text-align: right;
 }
-.sidebar-options li a {
+.sidebar-options a {
   color: #8596A6;
   text-decoration: none;
   font-size: 1em;
-  line-height: 1.5;
-  padding: 10px;
+  padding: 5px;
   padding-right: 0px;
 }
 
-.sidebar-options li a:hover {
+.sidebar-options a:hover {
   opacity: .6;
   transition: color .15s ease-in;
 }
