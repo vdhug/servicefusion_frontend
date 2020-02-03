@@ -1,6 +1,6 @@
 <template>
   <footer id="footer">
-    <p>footer</p>
+    <p>© Service Fusion Code test</p>
   </footer>
 </template>
 
@@ -11,5 +11,11 @@ export default {
 </script>
 
 <style>
-
+#footer {
+  margin-top: 30px;
+  padding: 30px 0;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: .8em;
+}
 </style>
