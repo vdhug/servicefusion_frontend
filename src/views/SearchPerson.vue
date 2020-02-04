@@ -16,7 +16,7 @@
             </v-card-title>
             <v-data-table
             :headers="headers"
-            :items="desserts"
+            :items="persons"
             :search="search"
             >
                 <template v-slot:item.action="{ item }">
@@ -64,104 +64,32 @@
         search: '',
         headers: [
           {
-            text: 'Dessert (100g serving)',
+            text: 'First name',
             align: 'left',
-            sortable: false,
-            value: 'name',
+            value: 'first_name',
           },
-          { text: 'Calories', value: 'calories' },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' },
+          { text: 'Last name', value: 'last_name' },
+          { text: 'Birth', value: 'birth' },
           { text: 'Actions', value: 'action', sortable: false },
         ],
-        desserts: [
+        persons: [
           {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: '1%',
+            first_name: 'Vitor Hugo',
+            last_name: 'da Silva Lima',
+            birth: '07/18/1997',
           },
           {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-            iron: '1%',
+            first_name: 'Joab',
+            last_name: 'da Silva Lima',
+            birth: '06/20/1995',
           },
           {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-            iron: '7%',
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-            iron: '8%',
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-            iron: '16%',
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-            iron: '0%',
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-            iron: '2%',
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-            iron: '45%',
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-            iron: '22%',
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-            iron: '6%',
+            first_name: 'Lucas',
+            last_name: 'Lima',
+            birth: '12/11/1977',
           },
         ],
       }
     },
   }
 </script>
-
-<style scoped>
-</style>
