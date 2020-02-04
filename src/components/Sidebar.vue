@@ -1,71 +1,54 @@
 <template>
-  <nav id="sidebar">
-    <p class="sidebar-title">Persons</p>
-    <ul class="sidebar-options">
-      <router-link to="/new">
-        New
-      </router-link>
+  <nav>
 
-      <router-link to="#">
-        Search
-      </router-link>
-    </ul>
+    <v-toolbar flat text class="grey lighten-4">
+      <v-app-bar-nav-icon class="grey--text" @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title class="text-uppercase grey--text">
+        <span class="font-weight-light">Service</span>
+        <span>Fusion</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn text color="grey">
+        <span>API Documentation</span>
+         <v-icon right>mdi-file-document</v-icon>
+      </v-btn>
 
-    <p  class="sidebar-title">API</p>
-    <ul class="sidebar-options">
-      <li><a href="#">Documentation</a></li>
-      <li><a href="#">Repository</a></li>
-    </ul>
+      <v-btn text color="grey">
+        <span>Repository</span>
+         <v-icon right>mdi-source-repository</v-icon>
+
+      </v-btn>
+      
+    </v-toolbar>
+
+    <v-navigation-drawer temporary app v-model="drawer">
+      <v-list>
+          <v-list-item v-for="link in links" :key="link.text" router :to="link.route">
+            <v-list-item-icon>
+              <v-icon class="black--text">{{ link.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title class="black--text">{{ link.text }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
   </nav>
 </template>
 
 <script>
 export default {
-    name: "Sidebar"
+    name: "Sidebar",
+    data() {
+      return {
+        drawer: false,
+        links: [
+          { icon: 'mdi-view-dashboard', text: 'Dashboard', route: '/' },
+          { icon: 'mdi-account-search', text: 'Search', route: '/search' },
+          { icon: 'mdi-account-plus', text: 'New', route: '/new' },
+        ]
+      }
+    }
 }
 </script>
 
-<style>
-
-#sidebar {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-end;
-  padding: 70px 30px 0px;
-  height: 100vh;
-}
-
-.sidebar-title {
-  font-size: 1.25em;
-  color: #253340;
-  text-transform: uppercase;
-  font-weight: 600;
-  margin-top: 30px;
-}
-
-.sidebar-options {
-  display: block;
-  margin-top: 10px;
-}
-
-.sidebar-options a {
-  display: block;
-  text-align: right;
-}
-.sidebar-options a {
-  color: #8596A6;
-  text-decoration: none;
-  font-size: 1em;
-  padding: 5px;
-  padding-right: 0px;
-}
-
-.sidebar-options a:hover {
-  opacity: .6;
-  transition: color .15s ease-in;
-}
-
-
-
-</style>
