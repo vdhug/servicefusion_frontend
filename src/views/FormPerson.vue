@@ -1,6 +1,9 @@
 <template>
   <div>
-    
+    <h1 class="subtitle-1 grey--text">New</h1>
+    <v-container class="my-3">
+        
+    </v-container>
   </div>
 </template>
           

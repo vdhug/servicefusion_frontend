@@ -1,7 +1,8 @@
 <template>
-  <v-app>    
+  <v-app class="px-5">    
     <Sidebar />
-    <v-content class="grey lighten-4">
+    <v-content class="grey lighten-4 px-5">
+      <router-view class="mx-5"></router-view>
     </v-content>
   </v-app>
 </template>

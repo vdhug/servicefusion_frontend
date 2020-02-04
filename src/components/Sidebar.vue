@@ -1,7 +1,7 @@
 <template>
   <nav>
 
-    <v-toolbar flat text class="grey lighten-4">
+    <v-toolbar flat text class="grey lighten-4 px-5">
       <v-app-bar-nav-icon class="grey--text" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="text-uppercase grey--text">
         <span class="font-weight-light">Service</span>

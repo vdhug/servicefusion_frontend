@@ -1,20 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import AddPerson from '../views/AddPerson.vue'
+import Dashboard from '../views/Dashboard.vue'
+import FormPerson from '../views/FormPerson.vue'
+import SearchPerson from '../views/SearchPerson.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: Home
+    name: 'dashboard',
+    component: Dashboard
   },
   {
     path: '/new',
     name: 'new',
-    component: AddPerson
+    component: FormPerson
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: SearchPerson
   }
 ]
 
