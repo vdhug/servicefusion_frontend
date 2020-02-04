@@ -2,7 +2,298 @@
   <div>
     <h1 class="subtitle-1 grey--text">New</h1>
     <v-container class="my-3">
-        
+      <v-form v-model="valid">
+        <v-container>
+          <section class="personal">
+
+          </section>
+          
+          <v-row>
+            <v-col cols="12">
+              <h3 class="title font-weight-light">
+                Personal informations
+              </h3>
+              <v-divider></v-divider>
+            </v-col>
+            <v-col cols="12" md="4">
+              <v-text-field
+                v-model="person.first_name"
+                :rules="nameRules"
+                :counter="50"
+                label="First name"
+                required
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="12" md="4">
+              <v-text-field
+                v-model="person.last_name"
+                :rules="nameRules"
+                :counter="50"
+                label="Last name"
+                required
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="12" md="4">
+              <v-menu
+                :close-on-content-click="false"
+                :nudge-right="40"
+                transition="scale-transition"
+                offset-y
+                min-width="290px"
+              >
+                <template v-slot:activator="{ on }">
+                  <v-text-field
+                    v-model="person.birth"
+                    label="Date of birth"
+                    prepend-icon="mdi-event"
+                    v-on="on"
+                    readonly
+                  ></v-text-field>
+                </template>
+                <v-date-picker v-model="person.birth"></v-date-picker>
+              </v-menu>
+            </v-col>
+            
+            <v-col cols="6" md="6" class="pr-5">
+              <h3 class="title font-weight-light mt-5">
+                Emails
+              </h3>
+
+              <v-divider></v-divider>
+              <v-tooltip top>
+                  <template v-slot:activator="{ on }">
+                      <v-icon
+                          class="mt-2 mb-0"
+                          @click="addNewEmail"
+                          color="primary"
+                          v-on="on"
+                      >
+                          mdi-plus
+                      </v-icon>
+                  </template>
+                  <span>Add new email</span>
+              </v-tooltip>
+             
+
+              <v-row v-for="(email, index) in person.emails" relative v-bind:key="`e-${index}`">
+                <v-col cols="11" md="11" class="py-2">
+                  <v-text-field
+                    v-model="email.address"
+                    :rules="emailRules"
+                    :label="`E-mail #${index}`"
+                    required       
+                  >
+                  </v-text-field>
+                 
+                </v-col>
+                <v-col cols="1" md="1" align-self="center">
+                  <v-tooltip class="px-0" 
+                        top>
+                    <template v-slot:activator="{ on }">
+                      <v-icon
+                        class="mb-2"
+                        @click="removeEmail(index)"
+                        color="error"
+                        v-on="on"
+                      >
+                          mdi-delete
+                      </v-icon>
+                        
+                    </template>
+                    <span>Remove email</span>
+                  </v-tooltip>   
+                </v-col>             
+              </v-row >
+            </v-col>
+
+            <v-col cols="6" md="6" class="pl-5">
+              <h3 class="title font-weight-light mt-5">
+                Phone Numbers
+              </h3>
+
+              <v-divider></v-divider>
+              <v-tooltip top>
+                  <template v-slot:activator="{ on }">
+                      <v-icon
+                          class="mt-2 mb-0"
+                          @click="addNewPhone"
+                          color="primary"
+                          v-on="on"
+                      >
+                          mdi-plus
+                      </v-icon>
+                  </template>
+                  <span>Add new phone number</span>
+              </v-tooltip>
+             
+
+              <v-row v-for="(phone, index) in person.phones" relative
+                  v-bind:key="`e-${index}`">
+                
+                <v-col
+                  cols="11"
+                  md="11"
+                  class="py-2"
+                >
+                  <v-text-field
+                    v-model="phone.number"
+                    :label="`Phone number #${index}`"
+                    required
+                  >
+                  </v-text-field>
+                 
+                </v-col>
+                <v-col
+                  cols="1"
+                  md="1"
+                  align-self="center"
+                >
+                  <v-tooltip class="px-0" 
+                        top>
+                    <template v-slot:activator="{ on }">
+                      <v-icon
+                        class="mb-2"
+                        @click="removePhone(index)"
+                        color="error"
+                        v-on="on"
+                      >
+                          mdi-delete
+                      </v-icon>
+                        
+                    </template>
+                    <span>Remove phone number</span>
+                  </v-tooltip>   
+                </v-col>             
+              </v-row >
+            </v-col>
+
+            <v-row>
+              <v-col cols="12" md="12" class="pl-5">
+                <h3 class="title font-weight-light mt-5">
+                  Addresses
+                </h3>
+                <v-divider></v-divider>
+                <v-tooltip top>
+                  <template v-slot:activator="{ on }">
+                      <v-icon
+                          class="mt-2 mb-0"
+                          @click="addNewAddress"
+                          color="primary"
+                          v-on="on"
+                      >
+                          mdi-plus
+                      </v-icon>
+                  </template>
+                  <span>Add new addres</span>
+              </v-tooltip>
+              </v-col>
+              <v-col cols="12" md="12" class="pl-5">
+              <v-row v-for="(address, index) in person.addresses" relative
+                  v-bind:key="`a-${index}`" class="mb-5">
+                <v-col cols="12">
+                <h3 class="title font-weight-light">
+                  Address #{{index}}
+                </h3>
+                <v-divider></v-divider>
+                </v-col>
+                <v-col cols="12" md="3" class="py-2">
+                  <v-text-field
+                    v-model="address.postal_code"
+                    label="Postal code"
+                    required
+                  >
+                  </v-text-field>
+                </v-col>
+
+                <v-col cols="12" md="3" class="py-2">
+                  <v-text-field
+                    v-model="address.country"
+                    label="Country"
+                    required
+                  >
+                  </v-text-field>
+                </v-col>
+
+                <v-col cols="12" md="3" class="py-2">
+                  <v-text-field
+                    v-model="address.state"
+                    label="State"
+                    required
+                  >
+                  </v-text-field>
+                </v-col>
+
+                <v-col cols="12" md="3" class="py-2">
+                  <v-text-field
+                    v-model="address.city"
+                    label="City"
+                    required
+                  >
+                  </v-text-field>
+                </v-col>
+
+                 <v-col cols="12" md="4" class="py-2">
+                  <v-text-field
+                    v-model="address.addres_line_1"
+                    label="Address line 1"
+                    required
+                  >
+                  </v-text-field>
+                 
+                </v-col>
+
+                <v-col cols="12" md="4" class="py-2">
+                  <v-text-field
+                    v-model="address.addres_line_2"
+                    label="Address line 2"
+                    required
+                  >
+                  </v-text-field>
+                </v-col>
+                <v-col cols="12" md="4" class="py-2" style="display:flex;">
+                  <v-text-field
+                    v-model="address.addres_line_3"
+                    label="Address line 3"
+                    class="mr-1"
+                    required
+                  >
+                  </v-text-field>
+                   <v-tooltip class="px-0"
+                        bottom>
+                    <template v-slot:activator="{ on }">
+                      <v-icon
+                        class="mb-2"
+                        @click="removeAddress(index)"
+                        color="error"
+                        v-on="on"
+                      >
+                          mdi-delete
+                      </v-icon>
+                        
+                    </template>
+                    <span>Remove address</span>
+                  </v-tooltip>   
+                </v-col>
+
+               
+                           
+              </v-row >
+            </v-col>
+
+            <v-col col="12" md="6">
+              <v-btn name="clear" color="error" class="mr-4" outlined>clear</v-btn>
+              <v-btn name=submit color="primary" outlined>submit</v-btn>
+            </v-col>
+            </v-row>
+
+            
+          </v-row>
+          
+          
+        </v-container>
+      </v-form>     
     </v-container>
   </div>
 </template>
@@ -16,17 +307,34 @@ export default {
         person: {
           first_name: "",
           last_name: "",
-          birth: "",
-          addresses: [],
-          numbers: [{
+          birth: new Date().toISOString().substr(0, 10),
+          phones: [{
             'number': ''
           }],
           emails: [
             {
               address: ""
             }
-          ]
-        }
+          ],
+          addresses: [{
+            address_line_1: '',
+            address_line_2: '',
+            address_line_3: '',
+            country: '',
+            state: '',
+            city: '',
+            postal_code: ''
+          }]
+        },
+        valid: false,
+        nameRules: [
+          v => !!v || 'Name is required',
+          v => v.length <= 50 || 'Name must be less than 10 characters',
+        ],
+        emailRules: [
+          v => !!v || 'E-mail is required',
+          v => /.+@.+/.test(v) || 'E-mail must be valid',
+        ]
       };
     },
     methods: {
@@ -40,125 +348,33 @@ export default {
       removeEmail(index) {
         this.person.emails.splice(index, 1);
       },
-      addNewNumber() {
-        this.person.numbers.push(
+      addNewPhone() {
+        this.person.phones.push(
           {
             number: ""
           }
         );
       },
-      removeNumber(index) {
-        this.person.numbers.splice(index, 1);
+      removePhone(index) {
+        this.person.phones.splice(index, 1);
+      },
+      addNewAddress() {
+        this.person.addresses.push(
+          {
+            address_line_1: '',
+            address_line_2: '',
+            address_line_3: '',
+            country: '',
+            state: '',
+            city: '',
+            postal_code: ''
+          }
+        );
+      },
+      removeAddress(index) {
+        this.person.addresses.splice(index, 1);
       }
     }
 }
 </script>
 
-<style scoped>
-.form {
-  display: flex;
-  flex-direction: column;
-  max-width: 500px;
-}
-
-.form label {
-  font-size: 1em;
-  margin-top: 15px;
-  text-transform: uppercase;
-}
-.form label:first-child {
-  margin-top: 5px;
-}
-
-.form input {
-  margin-top: 5px;
-  padding: 10px 5px;
-  font-size: 1em;
-  border: 1px solid #253340;
-  border-radius: 5px;
-}
-
-.form input:focus {
-  outline: none;
-}
-
-.btn {
-  display: inline-block;
-  width: 120px;
-  text-align: center;
-  padding: 10px;
-  border: 1px solid #253340;
-  border-radius: 5px;
-  margin: 5px 0;
-}
-.add {
-  width: 50px;
-  font-weight: bold;
-  font-size: 1em;
-}
-.add:hover {
-  background: #5AAFD1;
-}
-
-.component-input {
-  position: relative;
-}
-
-.component-input input {
- width: 100%;
-}
-
-.remove {
-  position: absolute;
-  right: -70px;
-  height: 40px;
-  top: 5px;
-  text-align: center;
-  width: 20px;
-  padding: 10px;
-  border: 1px solid #253340;
-  border-radius: 5px;
-  width: 50px;
-  font-weight: bold;
-  font-size: 1em;
-} 
-.remove:hover {
-  background: #FD5B46;
-}
-
-.controllers {
-  margin-top: 15px;
-  display: flex;
-}
-
-.cancel {
-  margin-right: 20px;
-  text-transform: uppercase;
-  font-size: 1em;
-}
-.cancel:hover {
-  background: #FD5B46;
-  cursor: pointer;
-}
-
-.submit {
-  text-transform: uppercase;
-  font-size: 1em;
-}
-.submit:hover {
-  background: #5AAFD1;
-  cursor: pointer;
-}
-
-.disabled {
-  background: #282828;
-  opacity: .3;
-  color: #F1F1F1;
-}
-.disabled:hover {
-  cursor: auto;
-  background: #282828;
-  opacity: .3;
-  color: #F1F1F1;
-}
-</style>
