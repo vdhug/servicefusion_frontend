@@ -10,7 +10,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #footer {
   margin-top: 30px;
   padding: 30px 0;
