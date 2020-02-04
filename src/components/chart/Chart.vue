@@ -1,6 +1,7 @@
 <template>
   <div id="chart">
     <pie-chart :data="chartData" :options="chartOptions"></pie-chart>
+    <label class="chart-description">Chart</label>
   </div>
 </template>
 
@@ -33,9 +34,17 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #chart {
   max-height: 300px;
-  max-width: 32%;
+  max-width: 100%;
+}
+
+.chart-description {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: 300;
+  letter-spacing: .1em;
 }
 </style>

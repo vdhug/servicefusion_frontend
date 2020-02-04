@@ -4,9 +4,6 @@
     <v-container class="my-3">
       <v-form v-model="valid">
         <v-container>
-          <section class="personal">
-
-          </section>
           
           <v-row>
             <v-col cols="12">
