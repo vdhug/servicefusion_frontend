@@ -85,7 +85,7 @@
                   </v-text-field>
                  
                 </v-col>
-                <v-col cols="1" md="1" align-self="center">
+                <v-col cols="1" md="1" align-self="center" v-if="index !=0">
                   <v-tooltip class="px-0" 
                         top>
                     <template v-slot:activator="{ on }">
@@ -128,7 +128,6 @@
 
               <v-row v-for="(phone, index) in person.phones" relative
                   v-bind:key="`e-${index}`">
-                
                 <v-col
                   cols="11"
                   md="11"
@@ -142,11 +141,7 @@
                   </v-text-field>
                  
                 </v-col>
-                <v-col
-                  cols="1"
-                  md="1"
-                  align-self="center"
-                >
+                <v-col cols="1" md="1" align-self="center" v-if="index !=0">
                   <v-tooltip class="px-0" 
                         top>
                     <template v-slot:activator="{ on }">
@@ -186,7 +181,7 @@
                   <span>Add new addres</span>
               </v-tooltip>
               </v-col>
-              <v-col cols="12" md="12" class="pl-5">
+            <v-col v-if="person.addresses.length" cols="12" md="12" class="pl-5">
               <v-row v-for="(address, index) in person.addresses" relative
                   v-bind:key="`a-${index}`" class="mb-5">
                 <v-col cols="12">
@@ -272,13 +267,14 @@
                     </template>
                     <span>Remove address</span>
                   </v-tooltip>   
-                </v-col>
-
-               
-                           
+                </v-col>    
               </v-row >
-            </v-col>
 
+            </v-col>
+            <v-col v-else cols="12">
+              <h3 class="subtitle-1 ml-2">No address provided</h3>
+            </v-col>
+            
             <v-col col="12" md="6">
               <v-btn name="clear" color="error" class="mr-4" outlined>clear</v-btn>
               <v-btn name=submit color="primary" outlined>submit</v-btn>

@@ -12,10 +12,10 @@ export default {
 
 <style scoped>
 #footer {
-  margin-top: 30px;
-  padding: 30px 0;
+  padding: 60px 0;
   text-align: center;
   text-transform: uppercase;
   font-size: .8em;
+  background-color: #F5F5F5;
 }
 </style>
