@@ -6,7 +6,7 @@
       <v-alert type="success" v-model="alert" dismissible>
         {{feedbackMessage}}
       </v-alert>
-      <PersonForm :person="person" v-on:childToParent="onChildClick">
+      <PersonForm :person="person" v-on:childToParent="onChildClick" ref="createForm">
       </PersonForm>
     <Loader v-if="loading" />
     </v-container>
@@ -77,6 +77,7 @@ export default {
         this.resetPerson();
       },
       resetPerson() {
+        this.$refs.createForm.reset();
         this.person = {
           first_name: "",
           last_name: "",

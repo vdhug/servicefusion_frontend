@@ -24,22 +24,22 @@
 
           <v-col cols="12" md="4">
             <v-card color="#385F73" dark class="pa-5" style="height: 200px;">
-              <v-card-title class="headline">Total persons: 55</v-card-title>
+              <v-card-title class="headline my-4">Total persons: {{stats.total}}</v-card-title>
                <v-card-subtitle>Total number of persons registered in the API.</v-card-subtitle>
             </v-card>
           </v-col>
 
           <v-col cols="12" md="4">
             <v-card color="#385F73" dark class="pa-5" style="height: 200px;">
-              <v-card-title class="headline">Total addresses: 55</v-card-title>
-               <v-card-subtitle>Total number of addresses registered in the API.</v-card-subtitle>
+              <v-card-title class="headline my-4">Younger: {{stats.younger.age}} years old</v-card-title>
+               <v-card-subtitle>The younger person registered in the API born on {{stats.younger.birth}}.</v-card-subtitle>
             </v-card>
           </v-col>
 
           <v-col cols="12" md="4">
             <v-card color="#385F73" dark class="pa-5" style="height: 200px;">
-              <v-card-title class="headline">Total emails: 120</v-card-title>
-               <v-card-subtitle>Total number of emails registered in the API.</v-card-subtitle>
+              <v-card-title class="headline my-4">Oldest: {{stats.oldest.age}} years old</v-card-title>
+               <v-card-subtitle>The oldest person registered in the API born on {{stats.oldest.birth}}.</v-card-subtitle>
             </v-card>
           </v-col>
         </v-row>
@@ -63,6 +63,17 @@ export default {
   data() {
     return {
       loaded: false,
+      stats: {
+        total: null,
+        younger: {
+          age: null,
+          birth: null
+        },
+        oldest: {
+          age: null,
+          birth: null,
+        }
+      },
       ages: {
         label: "Age range distribution about persons registered in the API.",
         chartdata: {}
@@ -76,6 +87,15 @@ export default {
   },
   async mounted () {
     this.loaded = false
+
+    try {
+      api.get("/analytics/stats/").then(response => {
+        this.stats = response.data;
+      })
+    }
+    catch (e) {
+      alert(e)
+    }
     try {
       api.get("/analytics/ages/").then(response => {
         const result = response.data;   

@@ -266,7 +266,7 @@
 
           <v-col col="12" md="6">
             
-            <v-btn v-if="!to_delete" name="clear" color="error" class="mr-4" outlined
+            <v-btn @click="reset" v-if="!to_delete" name="clear" color="error" class="mr-4" outlined
               >clear</v-btn>
               <v-btn v-if="!to_delete" :disabled="!valid" @click="emitToParent" name="submit" color="primary" class="mr-4" outlined>save</v-btn>
 
@@ -313,6 +313,9 @@ export default {
       if (this.$refs.form.validate()) {
         this.snackbar = true
       }
+    },
+    reset () {
+      this.$refs.form.reset()
     },
     emitToParent () {
       this.$emit('childToParent', this.person);
