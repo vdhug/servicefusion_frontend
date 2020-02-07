@@ -18,6 +18,8 @@
             :headers="headers"
             :items="persons"
             :search="search"
+            :loading="loading"
+            loading-text="Loading... Please wait"
             >
                 <template v-slot:item.action="{ item }">
                     <v-tooltip top>
@@ -63,6 +65,7 @@ import { api } from "@/services/index.js";
     name: "Search",
     data () {
       return {
+        loading: true,
         search: '',
         headers: [
           {
@@ -79,8 +82,9 @@ import { api } from "@/services/index.js";
     },
     methods: {
       getPersons() {
-        api.get("/persons").then(response => {
+        api.get("/persons/").then(response => {
           this.persons = response.data;
+          this.loading = false;
         })
       }
     },
