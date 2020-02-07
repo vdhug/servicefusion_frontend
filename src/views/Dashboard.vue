@@ -4,13 +4,7 @@
     <v-container class="my-3">
         <v-row style="min-height:420px;">
           <v-col cols="12" md="4">
-            <Chart />
-          </v-col>
-          <v-col cols="12" md="4">
-            <Chart />
-          </v-col>
-          <v-col cols="12" md="4">
-            <Chart />
+             <pie-chart v-if="loaded" :chartdata="ages.chartdata" :options="ages.options"></pie-chart>
           </v-col>
         </v-row>
 
@@ -49,11 +43,49 @@
 </template>
 
 <script>
-import Chart from "@/components/chart/Chart.vue";
+import PieChart from "@/components/chart/PieChart.vue";
+
+import { api } from "@/services/index.js";
+
 export default {
-  name: 'home',
+  name: 'Dashboard',
   components: {
-    Chart
+    PieChart
+  },
+  data() {
+    return {
+      loaded: false,
+      ages: {
+        chartdata: {}
+      }
+    };
+  },
+  async mounted () {
+    this.loaded = false
+    try {
+      api.get("/analytics/ages/").then(response => {
+        const result = response.data;   
+     
+        this.ages.chartdata = {
+              "hoverBackgroundColor": "red",
+              "hoverBorderWidth": 5,
+              "labels": result.labels,
+              "datasets": [
+                  {
+                      "label": "Age distribution",
+                      "backgroundColor": ["#41B883", "#E46651", "#00D8FF"],
+                      "data": result.data
+                  }
+              ]
+          }
+        this.ages.chartOptions = {
+          hoverBorderWidth: 10
+        }
+        this.loaded = true
+       })
+    } catch (e) {
+      alert(e)
+    }
   }
 }
 </script>

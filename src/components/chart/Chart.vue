@@ -6,31 +6,25 @@
 </template>
 
 <script>
-import PieChart from "./PieChart.js";
+import { Doughnut } from "vue-chartjs";
+
 export default {
   name: "Chart",
-  components: {
-    PieChart
+  extends: Doughnut,
+  props: {
+    chartData: {
+      type: Object,
+      default: null
+    },
+    chartOptions: {
+      type: Object,
+      default: null
+    }
   },
-  data() {
-    return {
-      chartOptions: {
-        hoverBorderWidth: 10
-      },
-      chartData: {
-        hoverBackgroundColor: "red",
-        hoverBorderWidth: 5,
-        labels: ["Green", "Red", "Blue"],
-        datasets: [
-          {
-            label: "Data One",
-            backgroundColor: ["#41B883", "#E46651", "#00D8FF"],
-            data: [1, 10, 5]
-          }
-        ]
-      }
-    };
-  }
+  mounted () {
+    this.renderChart(this.chartData, this.chartOptions)
+  },
+  
 };
 </script>
 
