@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Dashboard from '../views/Dashboard.vue'
-import FormPerson from '../views/FormPerson.vue'
+import PersonCreate from '../views/PersonCreate.vue'
 import SearchPerson from '../views/SearchPerson.vue'
 
 Vue.use(VueRouter)
@@ -15,7 +15,7 @@ const routes = [
   {
     path: '/new',
     name: 'new',
-    component: FormPerson
+    component: PersonCreate
   },
   {
     path: '/search',

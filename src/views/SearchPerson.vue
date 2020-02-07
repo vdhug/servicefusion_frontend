@@ -57,6 +57,8 @@
 </template>
           
 <script>
+import { api } from "@/services/index.js";
+
  export default {
     name: "Search",
     data () {
@@ -72,24 +74,18 @@
           { text: 'Birth', value: 'birth' },
           { text: 'Actions', value: 'action', sortable: false },
         ],
-        persons: [
-          {
-            first_name: 'Vitor Hugo',
-            last_name: 'da Silva Lima',
-            birth: '07/18/1997',
-          },
-          {
-            first_name: 'Joab',
-            last_name: 'da Silva Lima',
-            birth: '06/20/1995',
-          },
-          {
-            first_name: 'Lucas',
-            last_name: 'Lima',
-            birth: '12/11/1977',
-          },
-        ],
+        persons: [],
       }
     },
+    methods: {
+      getPersons() {
+        api.get("/persons").then(response => {
+          this.persons = response.data;
+        })
+      }
+    },
+    created() {
+      this.getPersons();
+    }
   }
 </script>
