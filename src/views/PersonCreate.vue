@@ -70,6 +70,10 @@ export default {
         this.loading = false;
         this.feedbackMessage = `The person '${this.person.first_name} ${this.person.last_name}' was created succesfully`;
         this.alert = true;
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
         this.resetPerson();
       },
       resetPerson() {

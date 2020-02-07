@@ -24,28 +24,30 @@
                 <template v-slot:item.action="{ item }">
                     <v-tooltip top>
                         <template v-slot:activator="{ on }">
+                          <router-link :to="`/edit/${item.id}`">
                             <v-icon
                                 small
                                 class="pa-4"
-                                @click="editItem(item)"
                                 v-on="on"
                             >
                                 mdi-pencil-outline
                             </v-icon>
+                            </router-link>
                         </template>
                         <span>Edit person</span>
                     </v-tooltip>
                     
                     <v-tooltip top>
                         <template v-slot:activator="{ on }">
+                          <router-link :to="`/delete/${item.id}`">
                             <v-icon
                                 class="pa-4"
                                 small
-                                @click="deleteItem(item)"
                                 v-on="on"
                             >
                                 mdi-delete
                             </v-icon>
+                          </router-link>
                         </template>
                         <span>Delete person</span>
                     </v-tooltip>
@@ -93,3 +95,9 @@ import { api } from "@/services/index.js";
     }
   }
 </script>
+
+<style>
+a {
+  text-decoration: none;
+}
+</style>

@@ -14,6 +14,7 @@
             :rules="nameRules"
             :counter="50"
             label="First name"
+            :readonly="to_delete"
             required
           ></v-text-field>
         </v-col>
@@ -24,6 +25,7 @@
             :rules="nameRules"
             :counter="50"
             label="Last name"
+            :readonly="to_delete"
             required
           ></v-text-field>
         </v-col>
@@ -45,7 +47,7 @@
                 readonly
               ></v-text-field>
             </template>
-            <v-date-picker v-model="person.birth" :max="currentDate"></v-date-picker>
+            <v-date-picker v-model="person.birth" :max="currentDate" :readonly="to_delete"></v-date-picker>
           </v-menu>
         </v-col>
 
@@ -55,7 +57,7 @@
           </h3>
 
           <v-divider></v-divider>
-          <v-tooltip top>
+          <v-tooltip top v-if="!to_delete">
             <template v-slot:activator="{ on }">
               <v-icon
                 class="mt-2 mb-0"
@@ -79,12 +81,13 @@
                 v-model="email.address"
                 :rules="emailRules"
                 :label="`E-mail #${index}`"
+                :readonly="to_delete"
                 required
               >
               </v-text-field>
             </v-col>
             <v-col cols="1" md="1" align-self="center" v-if="index != 0">
-              <v-tooltip class="px-0" top>
+              <v-tooltip class="px-0" top v-if="!to_delete">
                 <template v-slot:activator="{ on }">
                   <v-icon
                     class="mb-2"
@@ -107,7 +110,7 @@
           </h3>
 
           <v-divider></v-divider>
-          <v-tooltip top>
+          <v-tooltip top v-if="!to_delete">
             <template v-slot:activator="{ on }">
               <v-icon
                 class="mt-2 mb-0"
@@ -132,12 +135,13 @@
                 :label="`Phone number #${index}`"
                 :rules="phoneRules"
                 hint="+1 (202) 588-6500"
+                :readonly="to_delete"
                 required
               >
               </v-text-field>
             </v-col>
             <v-col cols="1" md="1" align-self="center" v-if="index != 0">
-              <v-tooltip class="px-0" top>
+              <v-tooltip class="px-0" top  v-if="!to_delete">
                 <template v-slot:activator="{ on }">
                   <v-icon
                     class="mb-2"
@@ -160,7 +164,7 @@
               Addresses
             </h3>
             <v-divider></v-divider>
-            <v-tooltip top>
+            <v-tooltip top  v-if="!to_delete">
               <template v-slot:activator="{ on }">
                 <v-icon
                   class="mt-2 mb-0"
@@ -190,6 +194,7 @@
                   v-model="address.postal_code"
                   :rules="addressRules"
                   label="Postal code"
+                  :readonly="to_delete"
                   required
                 >
                 </v-text-field>
@@ -200,18 +205,19 @@
                   v-model="address.country"
                   :rules="addressRules"
                   label="Country"
+                  :readonly="to_delete"
                   required
                 >
                 </v-text-field>
               </v-col>
 
               <v-col cols="12" md="3" class="py-2">
-                <v-text-field v-model="address.state" label="State" :rules="addressRules">
+                <v-text-field v-model="address.state" label="State" :rules="addressRules" :readonly="to_delete">
                 </v-text-field>
               </v-col>
 
               <v-col cols="12" md="3" class="py-2">
-                <v-text-field v-model="address.city" :rules="addressRules" label="City">
+                <v-text-field v-model="address.city" :rules="addressRules" label="City" :readonly="to_delete">
                 </v-text-field>
               </v-col>
 
@@ -220,6 +226,7 @@
                   v-model="address.address_line_1"
                   label="Address line 1"
                   :rules="addressRules"
+                  :readonly="to_delete"
                 >
                 </v-text-field>
               </v-col>
@@ -229,6 +236,7 @@
                   v-model="address.address_line_2"
                   label="Address line 2"
                   :rules="addressRules"
+                  :readonly="to_delete"
                 >
                 </v-text-field>
               </v-col>
@@ -237,10 +245,11 @@
                   v-model="address.address_line_3"
                   label="Address line 3"
                   :rules="addressRules"
+                  :readonly="to_delete"
                   class="mr-1"
                 >
                 </v-text-field>
-                <v-tooltip class="px-0" bottom>
+                <v-tooltip v-if="!to_delete" class="px-0" bottom>
                   <template v-slot:activator="{ on }">
                     <v-icon
                       class="mb-2"
@@ -262,9 +271,11 @@
 
           <v-col col="12" md="6">
             
-            <v-btn name="clear" color="error" class="mr-4" outlined
+            <v-btn v-if="!to_delete" name="clear" color="error" class="mr-4" outlined
               >clear</v-btn>
-              <v-btn :disabled="!valid" @click="emitToParent" name="submit" color="primary" class="mr-4" outlined>save</v-btn>
+              <v-btn v-if="!to_delete" :disabled="!valid" @click="emitToParent" name="submit" color="primary" class="mr-4" outlined>save</v-btn>
+
+              <v-btn v-else :disabled="!valid" @click="emitToParent" name="submit" color="error" class="mr-4" outlined>delete</v-btn>
           </v-col>
         </v-row>
       </v-row>
@@ -277,7 +288,8 @@
 export default {
   name: "PersonForm",
   props: {
-    person: Object
+    person: Object,
+    to_delete: Boolean
   },
   data() {
     return {
@@ -308,7 +320,7 @@ export default {
       }
     },
     emitToParent () {
-      this.$emit('childToParent', this.person)
+      this.$emit('childToParent', this.person);
     },
     addNewEmail() {
       this.person.emails.push(

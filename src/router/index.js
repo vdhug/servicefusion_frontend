@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Dashboard from '../views/Dashboard.vue'
 import PersonCreate from '../views/PersonCreate.vue'
+import PersonEdit from '../views/PersonEdit.vue'
+import PersonDelete from '../views/PersonDelete.vue'
 import SearchPerson from '../views/SearchPerson.vue'
 
 Vue.use(VueRouter)
@@ -21,6 +23,18 @@ const routes = [
     path: '/search',
     name: 'search',
     component: SearchPerson
+  },
+  {
+    path: '/edit/:id',
+    name: 'edit',
+    component: PersonEdit,
+    props: true
+  },
+  {
+    path: '/delete/:id',
+    name: 'delete',
+    component: PersonDelete,
+    props: true
   }
 ]
 
