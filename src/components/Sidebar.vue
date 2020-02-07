@@ -8,16 +8,15 @@
         <span>Fusion</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn text color="grey">
-        <span>API Documentation</span>
-         <v-icon right>mdi-file-document</v-icon>
-      </v-btn>
+      <a href="https://rocky-caverns-36312.herokuapp.com/api/" target="__blank" class="v-btn v-btn--flat v-btn--text theme--light v-size--default grey--text">
+        <span>API Routes</span>
+        <v-icon right>mdi-file-document</v-icon>
+      </a>
 
-      <v-btn text color="grey">
-        <span>Repository</span>
-         <v-icon right>mdi-source-repository</v-icon>
-
-      </v-btn>
+      <a href="https://github.com/vdhug/servicefusion_api" target="__blank" class="v-btn v-btn--flat v-btn--text theme--light v-size--default grey--text">
+        <span>API repository</span>
+        <v-icon right>mdi-source-repository</v-icon>
+      </a>
       
     </v-toolbar>
 
