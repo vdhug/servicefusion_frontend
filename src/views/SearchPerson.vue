@@ -18,6 +18,9 @@
             :headers="headers"
             :items="persons"
             :search="search"
+            :single-expand="singleExpand"
+            :expanded.sync="expanded"
+            show-expand
             :loading="loading"
             loading-text="Loading... Please wait"
             >
@@ -53,6 +56,24 @@
                     </v-tooltip>
                     
                 </template>
+                <template v-slot:expanded-item="{ item }">
+                  <td colspan=1 style="vertical-align: baseline;">
+                    <span class="subtitle-2 mt-2" style="display:block;">Emails:</span>
+                    <p class="caption mb-1" v-for="(email, index) in item.emails" :key="`ex-${index}`" >{{email.address}}  </p>
+                    <p v-if="item.phones.length == 0" class="mb-1">No email registered.</p>
+                  </td>
+                  <td colspan=1 style="vertical-align: baseline;">
+                    <span class="subtitle-2 mt-2" style="display:block;">Phones:</span>
+                    <p class="caption mb-1" v-for="(phone, index) in item.phones" :key="`exp-${index}`" >{{phone.number}}</p>
+                    <p v-if="item.phones.length == 0" class="mb-1">No phone number registered.</p>
+                  </td>
+
+                  <td colspan=2 style="vertical-align: baseline;">
+                    <span class="subtitle-2 mt-2" style="display:block;">Addresses:</span>
+                    <p class="caption mb-1" v-for="(address, index) in item.addresses" :key="`exa-${index}`" >{{address.address_line_1}} - {{address.address_line_2}} - {{address.address_line_3}} - {{address.city}} - {{address.state}} - {{address.country}} - {{address.postal_code}}</p>
+                    <p v-if="item.addresses.length == 0" class="mb-1">No address registered.</p>
+                  </td>
+                </template>
             </v-data-table>
         </v-card>
     </v-container>
@@ -67,6 +88,8 @@ import { api } from "@/services/index.js";
     name: "Search",
     data () {
       return {
+        expanded: [],
+        singleExpand: false,
         loading: true,
         search: '',
         headers: [
@@ -78,6 +101,7 @@ import { api } from "@/services/index.js";
           { text: 'Last name', value: 'last_name' },
           { text: 'Birth', value: 'birth' },
           { text: 'Actions', value: 'action', sortable: false },
+          { text: '', value: 'data-table-expand' },
         ],
         persons: [],
       }

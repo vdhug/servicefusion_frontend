@@ -25,21 +25,21 @@
           <v-col cols="12" md="4">
             <v-card color="#385F73" dark class="pa-5" style="height: 200px;">
               <v-card-title class="headline my-4">Total persons: {{stats.total}}</v-card-title>
-               <v-card-subtitle>Total number of persons registered in the API.</v-card-subtitle>
+               <v-card-subtitle>Total number of persons registered in the contact list.</v-card-subtitle>
             </v-card>
           </v-col>
 
           <v-col cols="12" md="4">
             <v-card color="#385F73" dark class="pa-5" style="height: 200px;">
               <v-card-title class="headline my-4">Younger: {{stats.younger.age}} years old</v-card-title>
-               <v-card-subtitle>The younger person registered in the API born on {{stats.younger.birth}}.</v-card-subtitle>
+               <v-card-subtitle>The younger person registered in the contact list were born on {{stats.younger.birth}}.</v-card-subtitle>
             </v-card>
           </v-col>
 
           <v-col cols="12" md="4">
             <v-card color="#385F73" dark class="pa-5" style="height: 200px;">
               <v-card-title class="headline my-4">Oldest: {{stats.oldest.age}} years old</v-card-title>
-               <v-card-subtitle>The oldest person registered in the API born on {{stats.oldest.birth}}.</v-card-subtitle>
+               <v-card-subtitle>The oldest person registered in the contact list were born on {{stats.oldest.birth}}.</v-card-subtitle>
             </v-card>
           </v-col>
         </v-row>
@@ -75,11 +75,11 @@ export default {
         }
       },
       ages: {
-        label: "Age range distribution about persons registered in the API.",
+        label: "Age range distribution of persons registered in the contact list.",
         chartdata: {}
       },
       secondary: {
-        label: "Total count of secondary informations about persons registered in the API.",
+        label: "Total count of secondary informations of persons registered in the contact list.",
         chartdata: {}
       },
       chartWidth: 30
