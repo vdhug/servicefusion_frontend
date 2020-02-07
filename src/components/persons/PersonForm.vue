@@ -15,7 +15,6 @@
             :counter="50"
             label="First name"
             :readonly="to_delete"
-            required
           ></v-text-field>
         </v-col>
 
@@ -26,7 +25,7 @@
             :counter="50"
             label="Last name"
             :readonly="to_delete"
-            required
+            
           ></v-text-field>
         </v-col>
 
@@ -82,7 +81,6 @@
                 :rules="emailRules"
                 :label="`E-mail #${index}`"
                 :readonly="to_delete"
-                required
               >
               </v-text-field>
             </v-col>
@@ -136,7 +134,6 @@
                 :rules="phoneRules"
                 hint="+1 (202) 588-6500"
                 :readonly="to_delete"
-                required
               >
               </v-text-field>
             </v-col>
@@ -195,7 +192,6 @@
                   :rules="addressRules"
                   label="Postal code"
                   :readonly="to_delete"
-                  required
                 >
                 </v-text-field>
               </v-col>
@@ -206,7 +202,6 @@
                   :rules="addressRules"
                   label="Country"
                   :readonly="to_delete"
-                  required
                 >
                 </v-text-field>
               </v-col>
@@ -325,6 +320,7 @@ export default {
     addNewEmail() {
       this.person.emails.push(
         {
+          id: null,
           address: ""
         }
       );
@@ -335,6 +331,7 @@ export default {
     addNewPhone() {
       this.person.phones.push(
         {
+          id: null,
           number: ""
         }
       );
@@ -345,6 +342,7 @@ export default {
     addNewAddress() {
       this.person.addresses.push(
         {
+          id: null,
           address_line_1: '',
           address_line_2: '',
           address_line_3: '',
